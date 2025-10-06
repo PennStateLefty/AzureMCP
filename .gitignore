@@ -1,0 +1,195 @@
+############################
+# .NET / Build Artifacts
+############################
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Ll]ogs/
+artifacts/
+TestResults/
+*.VisualState.xml
+*.pidb
+*.svclog
+*.suo
+*.user
+*.userosscache
+*.userprefs
+*.psess
+*.vsp
+*.vspx
+*.vsps
+*.vspx
+*.coverage
+*.coveragexml
+*.benchmarks/
+BenchmarkDotNet.Artifacts/
+
+############################
+# Configuration / Generated
+############################
+appsettings.*.local.json
+secrets.json
+Properties/launchSettings.json
+
+############################
+# IDE / Tooling
+############################
+.vs/
+.vscode/
+.idea/
+*.iml
+*.DotSettings
+_ReSharper.Caches/
+*.ncrunchsolution
+*.ncrunchproject
+*.orig
+
+############################
+# Package Management
+############################
+packages/
+.nuget/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+paket-files/
+paket.dependencies.restore.cached
+.paket/
+global.json.backup
+
+############################
+# Publish / Deployment
+############################
+publish/
+*.Publish.xml
+BundleArtifacts/
+Generated_Code/
+
+############################
+# Coverage / Analysis
+############################
+coverage/
+coverage-results/
+.coverage/
+.opencover/
+lcov.info
+.clover
+StyleCopReport.xml
+ReportGenerator/
+
+############################
+# Logs / Temp
+############################
+*.log
+*.log.*
+*.tmp
+*.temp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+############################
+# Git / GitHub
+############################
+.git-local/
+.git-credentials
+.git-secret/
+.github/workflows/_temp/
+.github/actions/_temp/
+*.patch
+*.diff
+
+############################
+# Containers / Docker
+############################
+docker-compose.override.yml
+**/docker-data/
+.docker/
+.dockerignore.local
+
+############################
+# Azure / Emulators
+############################
+# Azurite local emulator artifacts
+__azurite_db_*__.json
+__azurite_db_*.json
+__blobstorage__/
+__queuestorage__/
+__tablestorage__/
+.azurite/
+*.azurite
+# Legacy Azure Storage Emulator
+devstore.accdb
+AzureStorageEmulator*.log
+
+############################
+# Other Local Services
+############################
+local.settings.json
+*.localstorage
+*.sqlite
+*.db
+
+############################
+# Security
+############################
+*.pfx
+*.p12
+*.key
+*.crt
+*.cer
+
+############################
+# Archives
+############################
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+
+############################
+# Node (if incidental)
+############################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+package-lock.json
+
+############################
+# Python (if scripts used)
+############################
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+env/
+
+############################
+# Caches
+############################
+.cache/
+.dist/
+.tmp/
+.temp/
+
+############################
+# Misc
+############################
+*.sqlite-shm
+*.sqlite-wal
+*.orig
+*.rej

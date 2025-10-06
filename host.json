@@ -1,0 +1,17 @@
+{
+  "version": "2.0",
+  "extensions": {
+    "mcp": {
+      "instructions": "This is a demo configuration for the ITSM MCP connector.",
+      "serverName": "ITSM Demo MCP",
+      "serverVersion": "1.0.0",
+      "messageOptions": {
+        "useAbsoluteUriForEndpoint": false
+      }
+    }
+  },
+  "extensionBundle": {
+    "id": "Microsoft.Azure.Functions.ExtensionBundle",
+    "version": "[4.*, 5.0.0)"
+  }
+}
