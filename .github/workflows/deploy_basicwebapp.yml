@@ -1,0 +1,50 @@
+name: Deploy Azure Basic Web App Demo (Bicep)
+
+on:
+  workflow_dispatch:
+    inputs:
+      projectName:
+        description: 'Project name (spaces allowed, will be normalized)'
+        required: true
+        type: string
+      location:
+        description: 'Azure region (must be one of: eastus, westus2, centralus, westeurope, northeurope, uksouth, southeastasia)'
+        required: true
+        type: string
+      owningTeam:
+        description: 'Owning team name (tag)'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EAFBC1C1593B4DDC970EDE2857E69E3F }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B195EFE1B30E463B9568687AFAFB741B }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_46144504394D4D5894139B3AF845BCBF }}
+
+      - name: Azure CLI What-If (Preview)
+        run: |
+          az deployment sub what-if \
+            --name basicwebapp-demo \
+            --location ${{ github.event.inputs.location }} \
+            --template-file infra/basic-web-app/main.bicep \
+            --parameters projectName="${{ github.event.inputs.projectName }}" location="${{ github.event.inputs.location }}" owningTeam="${{ github.event.inputs.owningTeam }}"
+
+      - name: Azure CLI Deploy
+        run: |
+          az deployment sub create \
+            --name basicwebapp-demo \
+            --location ${{ github.event.inputs.location }} \
+            --template-file infra/basic-web-app/main.bicep \
+            --parameters projectName="${{ github.event.inputs.projectName }}" location="${{ github.event.inputs.location }}" owningTeam="${{ github.event.inputs.owningTeam }}"
