@@ -25,10 +25,10 @@ param owningTeam string
 var normalizedProject = toLower(replace(projectName, ' ', ''))
 
 // Derive resource names (simple deterministic pattern). Truncate where global name length limits apply.
-var rgName = '${normalizedProject}-rg'
-var aspName = '${normalizedProject}-asp'
-var cosmosName = '${normalizedProject}-cosmos'
-var sbName = '${normalizedProject}-sb'
+var rgName = 'rg-${normalizedProject}'
+var aspName = 'asp-${normalizedProject}'
+var cosmosName = 'cosmos-${normalizedProject}'
+var sbName = 'sb-${normalizedProject}'
 // Storage account: must be globally unique, <=24, lowercase alphanumeric. Basic shortening + uniqueString salt.
 var storageBase = take(replace(normalizedProject, '-', ''), 12)
 var storageAccountName = take('${storageBase}${uniqueString(subscription().id, normalizedProject)}', 24)
