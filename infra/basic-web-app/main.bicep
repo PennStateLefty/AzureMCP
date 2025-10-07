@@ -59,6 +59,7 @@ module appServicePlanModule './modules/appServicePlan.bicep' = {
     location: location
     tags: commonTags
   }
+  dependsOn: [rgModule]
 }
 
 // 3. Cosmos DB (serverless)
@@ -70,6 +71,7 @@ module cosmosDbModule './modules/cosmosDb.bicep' = {
     location: location
     tags: commonTags
   }
+  dependsOn: [rgModule]
 }
 
 // 4. Service Bus
@@ -81,6 +83,7 @@ module serviceBusModule './modules/serviceBus.bicep' = {
     location: location
     tags: commonTags
   }
+  dependsOn: [rgModule]
 }
 
 // 5. Storage Account (shared key disabled inside module)
@@ -92,6 +95,7 @@ module storageAccountModule './modules/storageAccount.bicep' = {
     location: location
     tags: commonTags
   }
+  dependsOn: [rgModule]
 }
 
 // Outputs
