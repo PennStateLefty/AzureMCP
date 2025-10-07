@@ -27,11 +27,11 @@ var normalizedProject = toLower(replace(projectName, ' ', ''))
 // Derive resource names (simple deterministic pattern). Truncate where global name length limits apply.
 var rgName = 'rg-${normalizedProject}'
 var aspName = 'asp-${normalizedProject}'
-var cosmosName = 'cosmos-${normalizedProject}'
+var sqlDatabaseName = 'sqldb-${normalizedProject}-${take(uniqueString(subscription().id, normalizedProject), 6)}'
 var sbName = 'sb-${normalizedProject}'
 // Storage account: must be globally unique, <=24, lowercase alphanumeric. Basic shortening + uniqueString salt.
-var storageBase = take(replace(normalizedProject, '-', ''), 12)
-var storageAccountName = take('${storageBase}${uniqueString(subscription().id, normalizedProject)}', 24)
+var storageBase = take(replace(normalizedProject, '-', ''), 10)
+var storageAccountName = '${storageBase}${take(uniqueString(subscription().id, normalizedProject), 14)}'
 
 // Common tags
 var commonTags = {
@@ -62,12 +62,12 @@ module appServicePlanModule './modules/appServicePlan.bicep' = {
   dependsOn: [rgModule]
 }
 
-// 3. Cosmos DB (serverless)
-module cosmosDbModule './modules/cosmosDb.bicep' = {
-  name: 'cosmos-${normalizedProject}'
+// 3. SQL Database (Basic tier - cheapest)
+module sqlDatabaseModule './modules/sqlDatabase.bicep' = {
+  name: 'sqldb-${normalizedProject}'
   scope: resourceGroup(rgName)
   params: {
-    name: cosmosName
+    name: sqlDatabaseName
     location: location
     tags: commonTags
   }
@@ -101,6 +101,7 @@ module storageAccountModule './modules/storageAccount.bicep' = {
 // Outputs
 output resourceGroupName string = rgName
 output appServicePlanName string = aspName
-output cosmosDbName string = cosmosName
+output sqlServerName string = sqlDatabaseModule.outputs.sqlServerName
+output sqlDatabaseName string = sqlDatabaseModule.outputs.sqlDatabaseName
 output serviceBusName string = sbName
 output storageAccountName string = storageAccountName
