@@ -3,6 +3,9 @@ param name string
 param location string = resourceGroup().location
 @description('Tags to apply to the SQL server and database')
 param tags object = {}
+@description('SQL Server administrator password')
+@secure()
+param sqlAdminPassword string
 
 // SQL Server (logical server)
 resource sqlServer 'Microsoft.Sql/servers@2023-02-01-preview' = {
@@ -11,7 +14,7 @@ resource sqlServer 'Microsoft.Sql/servers@2023-02-01-preview' = {
   tags: tags
   properties: {
     administratorLogin: 'sqladmin'
-    administratorLoginPassword: 'P@ssw0rd123!' // Note: In production, use Key Vault reference
+    administratorLoginPassword: sqlAdminPassword
     version: '12.0'
     minimalTlsVersion: '1.2'
     publicNetworkAccess: 'Enabled'

@@ -15,6 +15,10 @@ on:
         description: 'Owning team name (tag)'
         required: true
         type: string
+      sqlAdminPassword:
+        description: 'SQL Server administrator password'
+        required: true
+        type: string
 
 jobs:
   deploy:
@@ -39,7 +43,7 @@ jobs:
             --name basicwebapp-demo \
             --location ${{ github.event.inputs.location }} \
             --template-file infra/basic-web-app/main.bicep \
-            --parameters projectName="${{ github.event.inputs.projectName }}" location="${{ github.event.inputs.location }}" owningTeam="${{ github.event.inputs.owningTeam }}"
+            --parameters projectName="${{ github.event.inputs.projectName }}" location="${{ github.event.inputs.location }}" owningTeam="${{ github.event.inputs.owningTeam }}" sqlAdminPassword="${{ secrets.SQL_ADMIN_PASSWORD }}"
 
       - name: Azure CLI Deploy
         run: |
@@ -47,4 +51,4 @@ jobs:
             --name basicwebapp-demo \
             --location ${{ github.event.inputs.location }} \
             --template-file infra/basic-web-app/main.bicep \
-            --parameters projectName="${{ github.event.inputs.projectName }}" location="${{ github.event.inputs.location }}" owningTeam="${{ github.event.inputs.owningTeam }}"
+            --parameters projectName="${{ github.event.inputs.projectName }}" location="${{ github.event.inputs.location }}" owningTeam="${{ github.event.inputs.owningTeam }}" sqlAdminPassword="${{ secrets.SQL_ADMIN_PASSWORD }}"

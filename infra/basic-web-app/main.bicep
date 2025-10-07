@@ -21,6 +21,10 @@ param location string
 @description('Owning team name applied as a tag on all resources')
 param owningTeam string
 
+@description('SQL Server administrator password')
+@secure()
+param sqlAdminPassword string
+
 // Normalize project name: remove spaces, lowercase
 var normalizedProject = toLower(replace(projectName, ' ', ''))
 
@@ -70,6 +74,7 @@ module sqlDatabaseModule './modules/sqlDatabase.bicep' = {
     name: sqlDatabaseName
     location: location
     tags: commonTags
+    sqlAdminPassword: sqlAdminPassword
   }
   dependsOn: [rgModule]
 }
